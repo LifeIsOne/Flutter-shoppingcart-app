@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shoppingcart_app/constants.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,18 +13,36 @@ class MyApp extends StatelessWidget {
         primarySwatch: kPrimaryColor,
         scaffoldBackgroundColor: kPrimaryColor,
       ),
+      home: ShoppingCartPage(),
     );
   }
 }
 
-class ShoppingCarHeader extends StatefulWidget {
-  const ShoppingCarHeader({super.key});
-
+class ShoppingCartPage extends StatelessWidget {
   @override
-  State<ShoppingCarHeader> createState() => _ShoppingCarHeaderState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildShoppingCartAppBar(),
+      body: Column(
+        children: [
+          ShoppingCartHeader(),
+          ShoppingCartDetail(), // 앱 완성후 세로 높이가 맞지 않으면 Expanded 위젯 사용하자!
+        ],
+      ),
+    );
+  }
+
+  AppBar _buildShoppingCartAppBar() {
+    return AppBar();
+  }
 }
 
-class _ShoppingCarHeaderState extends State<ShoppingCarHeader> {
+class ShoppingCartHeader extends StatefulWidget {
+  @override
+  State<ShoppingCartHeader> createState() => _ShoppingCartHeaderState();
+}
+
+class _ShoppingCartHeaderState extends State<ShoppingCartHeader> {
   int selectedId = 0;
 
   List<String> selectedPic = [
@@ -36,6 +52,13 @@ class _ShoppingCarHeaderState extends State<ShoppingCarHeader> {
     "assets/p4.jpeg",
   ];
 
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox();
+  }
+}
+
+class ShoppingCartDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox();
