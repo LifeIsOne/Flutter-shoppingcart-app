@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shoppingcart_app/constants.dart';
 
@@ -6,6 +7,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +36,20 @@ class ShoppingCartPage extends StatelessWidget {
   }
 
   AppBar _buildShoppingCartAppBar() {
-    return AppBar();
+    return AppBar(
+      leading: IconButton(
+        onPressed: () {},
+        icon: Icon(Icons.arrow_back),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.shopping_cart),
+        ),
+        SizedBox(width: 16)
+      ],
+      elevation: 0.0,
+    );
   }
 }
 
@@ -54,13 +70,90 @@ class _ShoppingCartHeaderState extends State<ShoppingCartHeader> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox();
+    return Column(
+      children: [
+        _buildHeaderPic(),
+        _buildHeaderSelector(),
+      ],
+    );
+  }
+
+  Widget _buildHeaderPic() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: AspectRatio(
+        aspectRatio: 5 / 3,
+        child: Image.asset(
+          selectedPic[selectedId],
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeaderSelector() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _buildHeaderSelectorButton(0, Icons.directions_bike),
+        _buildHeaderSelectorButton(1, Icons.motorcycle),
+        _buildHeaderSelectorButton(2, CupertinoIcons.car_detailed),
+        _buildHeaderSelectorButton(3, CupertinoIcons.airplane),
+      ],
+    );
+  }
+
+  Widget _buildHeaderSelectorButton(int id, IconData mIcon) {
+    return Container(
+      width: 70,
+      height: 70,
+      decoration: BoxDecoration(
+        color: id == selectedId ? kAccentColor : kSecondaryColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: IconButton(
+          onPressed: () {
+            setState(() {
+              selectedId = id;
+            });
+          },
+          icon: Icon(mIcon, color: Colors.black)),
+    );
   }
 }
 
 class ShoppingCartDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(40), // 끝을 둥글게 40 - 뭐를?
+      ),
+      child: Column(
+        children: [
+          _buildDetailNameAndPrice(),
+          _buildDetailRatingAndReviewCount(),
+          _buildDetailColorOptions(),
+          _buildDetailButton(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailNameAndPrice() {
+    return SizedBox();
+  }
+
+  Widget _buildDetailRatingAndReviewCount() {
+    return SizedBox();
+  }
+
+  Widget _buildDetailColorOptions() {
+    return SizedBox();
+  }
+
+  Widget _buildDetailButton(BuildContext context) {
     return SizedBox();
   }
 }
